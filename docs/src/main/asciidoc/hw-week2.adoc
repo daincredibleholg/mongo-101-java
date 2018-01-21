@@ -1,0 +1,62 @@
+= Homework Week 2
+
+## Homework 2.2
+
+* Import into Docker:
++
+[source,bash]
+----
+cat grades.json| docker exec -i mongo mongoimport --drop -d students -c grades
+----
+* Run a query that
+** Filters for `score` greater or equal (`$gte`) than `65`
+** and is of `type` `exam`
+** sort by `score` ascending
++
+[source,json]
+----
+db.grades.find({"score": {"$gte": 65}, "type": "exam"}).sort({"score": 1});
+----
+* Result: `22`
+
+## Homework 2.3
+
+See class `hw.week2.HomeWork3`.
+s
+Answer is: 54
+
+## Homework 2.5
+
+Query for all movies released in 2013, rated PG-13 and check `awards.wins` is 0:
+
+[source,json]
+----
+db.movieDetails.find(
+    {"year": 2013, "rated": "PG-13", "awards.wins": 0},
+    {"_id": 0, "title": 1, "rated": 1, "awards": 1});
+----
+
+Result is:
+
+[source,json]
+----
+{
+	"title" : "A Decade of Decadence, Pt. 2: Legacy of Dreams",
+	"rated" : "PG-13",
+	"awards" : {
+		"wins" : 0,
+		"nominations" : 0,
+		"text" : ""
+	}
+}
+----
+
+## Homework 2.6
+Get all movies with _Sweden_ second (meaning: index 1) in the list of countries (`countries`):
+
+[source,json]
+----
+db.movieDetails.find({"countries.1": "Sweden"}).count()
+----
+
+Answer: 6
