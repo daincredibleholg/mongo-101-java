@@ -121,3 +121,5 @@ gradle-app.setting
 
 
 # End of https://www.gitignore.io/api/intellij+all,linux,macos,gradle
+
+materials/
